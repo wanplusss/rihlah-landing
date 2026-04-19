@@ -1,0 +1,1245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rihlah — a quiet companion for your spiritual journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fafaf9;
+    --paper:#ffffff;
+    --ink:#0a0a0a;
+    --ink-2:#27272a;
+    --mute:#71717a;
+    --line:#e7e5e4;
+    --line-2:#d6d3d1;
+    --green:oklch(0.68 0.14 160);
+    --green-deep:oklch(0.52 0.13 160);
+    --green-soft:oklch(0.95 0.04 160);
+    --amber:oklch(0.78 0.14 75);
+    --red:oklch(0.65 0.20 25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,Helvetica,Arial,sans-serif;font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400}
+
+  /* ───────────────── nav ───────────────── */
+  nav{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--bg) 86%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1240px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em;font-size:1.02rem}
+  .brand-dot{width:22px;height:22px;border-radius:6px;background:var(--ink);display:grid;place-items:center}
+  .brand-dot::after{content:"";width:6px;height:6px;border-radius:999px;background:var(--green)}
+  .nav-links{display:flex;gap:28px;font-size:.88rem;color:var(--ink-2)}
+  .nav-links a{opacity:.75;transition:opacity .2s}
+  .nav-links a:hover{opacity:1}
+  .nav-cta{display:flex;gap:10px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font-size:.86rem;font-weight:500;border:1px solid transparent;transition:all .2s;cursor:pointer;background:transparent;color:inherit;font-family:inherit}
+  .btn-ghost{border-color:var(--line-2);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn-solid{background:var(--ink);color:var(--paper)}
+  .btn-solid:hover{background:var(--green-deep)}
+  @media(max-width:820px){.nav-links{display:none}}
+
+  /* ───────────────── hero ───────────────── */
+  .hero{max-width:1240px;margin:0 auto;padding:72px 32px 40px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:72px;align-items:center}
+  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:48px}}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;font-size:.76rem;color:var(--ink-2)}
+  .eyebrow .pulse{width:6px;height:6px;border-radius:999px;background:var(--green);box-shadow:0 0 0 0 var(--green);animation:pulse 2.2s ease-out infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--green) 50%,transparent)}80%,100%{box-shadow:0 0 0 8px transparent}}
+  h1{font-size:clamp(2.8rem,5.8vw,5rem);line-height:1.02;letter-spacing:-.035em;font-weight:500;margin:22px 0 22px}
+  h1 .serif{color:var(--green-deep)}
+  .lede{font-size:1.18rem;line-height:1.52;color:var(--ink-2);max-width:52ch;font-weight:400}
+  .hero-meta{display:flex;gap:28px;margin-top:40px;flex-wrap:wrap}
+  .hero-meta > div{border-left:1px solid var(--line-2);padding-left:14px}
+  .hero-meta .k{font-size:1.3rem;font-weight:500;letter-spacing:-.02em}
+  .hero-meta .v{font-size:.78rem;color:var(--mute);margin-top:2px}
+  .hero-cta{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
+
+  /* phone */
+  .phone-wrap{position:relative;display:flex;justify-content:center;align-items:center}
+  .phone{width:300px;height:620px;background:#0a0a0a;border-radius:46px;padding:10px;box-shadow:0 40px 80px -30px rgba(10,10,10,.35),0 0 0 1px rgba(10,10,10,.08);position:relative}
+  .phone::before{content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);width:96px;height:26px;background:#0a0a0a;border-radius:999px;z-index:3}
+  .screen{width:100%;height:100%;background:var(--bg);border-radius:38px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+  .statusbar{display:flex;justify-content:space-between;align-items:center;padding:14px 24px 8px;font-size:.72rem;font-weight:600}
+  .statusbar .icons{display:flex;gap:4px;align-items:center;color:var(--ink)}
+  .screen-header{padding:18px 22px 10px;border-bottom:1px solid var(--line)}
+  .screen-header .date{font-size:.72rem;color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+  .screen-header .title-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:4px}
+  .screen-header h3{font-size:1.4rem;letter-spacing:-.02em;font-weight:500}
+  .screen-header .streak{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;color:var(--green-deep);font-weight:500}
+  .daystrip{display:flex;gap:6px;padding:14px 22px 16px;border-bottom:1px solid var(--line)}
+  .day{flex:1;text-align:center;font-size:.68rem;color:var(--mute);padding:7px 0;border-radius:10px;border:1px solid transparent}
+  .day.done{background:var(--green-soft);color:var(--green-deep)}
+  .day.today{background:var(--ink);color:var(--paper)}
+  .day b{display:block;font-size:.92rem;margin-top:2px;font-weight:500}
+  .prayers{padding:12px 18px;flex:1;overflow:hidden}
+  .prayer{display:flex;align-items:center;gap:12px;padding:10px 6px;border-bottom:1px solid var(--line)}
+  .prayer:last-child{border:none}
+  .check{width:22px;height:22px;border-radius:999px;border:1.5px solid var(--line-2);flex-shrink:0;display:grid;place-items:center;transition:all .2s}
+  .check.on{background:var(--green);border-color:var(--green)}
+  .check.on::after{content:"";width:8px;height:4px;border-left:1.8px solid var(--paper);border-bottom:1.8px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+  .p-name{flex:1;font-size:.92rem;font-weight:500}
+  .p-time{font-size:.72rem;color:var(--mute);font-variant-numeric:tabular-nums}
+  .p-tags{display:flex;gap:4px;margin-left:8px}
+  .tag{font-size:.64rem;padding:2px 7px;border-radius:999px;background:var(--green-soft);color:var(--green-deep);font-weight:500}
+  .tag.muted{background:var(--line);color:var(--mute)}
+  .tabbar{height:62px;border-top:1px solid var(--line);display:flex;padding:0 8px;align-items:center;background:var(--paper)}
+  .tabbar .tab{flex:1;display:grid;place-items:center;gap:3px;color:var(--mute);font-size:.6rem;font-weight:500}
+  .tabbar .tab.active{color:var(--ink)}
+  .tabbar .tab svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.6;fill:none}
+
+  /* floating annotation cards next to phone */
+  .annot{position:absolute;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:.76rem;box-shadow:0 12px 32px -18px rgba(0,0,0,.25);max-width:200px}
+  .annot .lab{font-size:.62rem;color:var(--green-deep);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .annot .txt{color:var(--ink-2);margin-top:3px;line-height:1.35}
+  .annot.one{top:8%;left:-22%;animation:float 6s ease-in-out infinite}
+  .annot.two{bottom:12%;right:-18%;animation:float 7s ease-in-out infinite reverse}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @media(max-width:1100px){.annot{display:none}}
+
+  /* ───────────────── shared sections ───────────────── */
+  section{max-width:1240px;margin:0 auto;padding:120px 32px}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:56px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(2rem,3.8vw,3.1rem);letter-spacing:-.028em;font-weight:500;line-height:1.06;max-width:22ch}
+  .sec-head h2 .serif{color:var(--green-deep)}
+  .sec-head .note{max-width:38ch;color:var(--mute);line-height:1.55;font-size:.96rem}
+
+  /* principles */
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  @media(max-width:860px){.principles{grid-template-columns:1fr}}
+  .principle{background:var(--paper);padding:40px 32px;min-height:220px;display:flex;flex-direction:column;gap:16px;position:relative}
+  .principle .num{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.6rem;color:var(--green-deep)}
+  .principle h3{font-size:1.25rem;letter-spacing:-.015em;font-weight:500}
+  .principle p{color:var(--ink-2);font-size:.94rem;line-height:1.5}
+  .principle .foot{margin-top:auto;padding-top:18px;font-size:.74rem;color:var(--mute);border-top:1px dashed var(--line)}
+
+  /* feature layout — alternating */
+  .feat{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center;margin-bottom:140px}
+  .feat.rev{grid-template-columns:1.1fr 1fr}
+  .feat.rev .feat-copy{order:2}
+  .feat.rev .feat-demo{order:1}
+  @media(max-width:900px){.feat,.feat.rev{grid-template-columns:1fr;gap:40px}.feat.rev .feat-copy,.feat.rev .feat-demo{order:initial}}
+  .feat-copy .mono{margin-bottom:18px;display:block}
+  .feat-copy h3{font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.025em;font-weight:500;line-height:1.1;margin-bottom:18px}
+  .feat-copy p{font-size:1.04rem;color:var(--ink-2);line-height:1.55;margin-bottom:14px;max-width:48ch}
+  .feat-copy ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:10px}
+  .feat-copy li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;color:var(--ink-2)}
+  .feat-copy li::before{content:"";width:5px;height:5px;background:var(--green);border-radius:999px;margin-top:9px;flex-shrink:0}
+  .feat-demo{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:32px;min-height:440px;position:relative;overflow:hidden}
+  .demo-label{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px;font-weight:500}
+  .demo-label span:last-child{color:var(--green-deep)}
+
+  /* heatmap */
+  .heat{display:grid;grid-template-columns:repeat(26,1fr);gap:3px;margin:12px 0 20px}
+  .heat .c{aspect-ratio:1;border-radius:3px;background:var(--line)}
+  .heat .c.l1{background:oklch(0.92 0.06 160)}
+  .heat .c.l2{background:oklch(0.82 0.1 160)}
+  .heat .c.l3{background:oklch(0.72 0.13 160)}
+  .heat .c.l4{background:oklch(0.62 0.14 160)}
+  .heat-legend{display:flex;justify-content:space-between;font-size:.72rem;color:var(--mute);align-items:center}
+  .heat-legend .scale{display:flex;gap:3px;align-items:center}
+  .heat-legend .scale .c{width:10px;height:10px;border-radius:2px}
+
+  /* radar/stat blocks inside demos */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}
+  .stat-row .st .n{font-size:1.6rem;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .stat-row .st .n small{color:var(--mute);font-size:.8rem;font-weight:400;margin-left:3px}
+  .stat-row .st .lb{font-size:.72rem;color:var(--mute);margin-top:2px;letter-spacing:.04em;text-transform:uppercase}
+
+  /* forgetting curve */
+  .curve-wrap{height:260px;position:relative;margin:8px 0 4px}
+  .curve-wrap svg{width:100%;height:100%;overflow:visible}
+  .curve-legend{display:flex;gap:16px;justify-content:flex-end;font-size:.74rem;color:var(--ink-2)}
+  .curve-legend span{display:inline-flex;align-items:center;gap:6px}
+  .curve-legend .dot{width:8px;height:8px;border-radius:999px}
+
+  /* challenge */
+  .chal{display:flex;flex-direction:column;gap:14px}
+  .chal-head{display:flex;justify-content:space-between;align-items:center}
+  .chal-head .t{font-size:1.1rem;font-weight:500;letter-spacing:-.01em}
+  .chal-head .d{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--green-deep);font-weight:500}
+  .chal-bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+  .chal-bar .fill{height:100%;background:var(--green);border-radius:999px;width:62%}
+  .chal-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:8px}
+  .chal-grid .d{aspect-ratio:1;border-radius:6px;border:1px solid var(--line);display:grid;place-items:center;font-size:.72rem;color:var(--mute);font-weight:500}
+  .chal-grid .d.done{background:var(--green);color:var(--paper);border-color:var(--green)}
+  .chal-grid .d.today{border-color:var(--ink);color:var(--ink)}
+  .chal-foot{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:.86rem;color:var(--ink-2);display:flex;justify-content:space-between}
+
+  /* quran sample */
+  .ayah-card{background:#fbfaf7;border:1px solid var(--line);border-radius:14px;padding:26px;text-align:right;direction:rtl;margin-bottom:16px}
+  .ayah-ar{font-family:'Amiri',serif;font-size:1.9rem;line-height:2.1;letter-spacing:0;color:var(--ink)}
+  .ayah-en{direction:ltr;text-align:left;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-2);font-size:.92rem;line-height:1.55;font-family:'Instrument Serif',serif;font-style:italic}
+  .ayah-meta{direction:ltr;text-align:left;margin-top:14px;display:flex;justify-content:space-between;align-items:center;font-size:.74rem;color:var(--mute)}
+  .ayah-meta .controls{display:flex;gap:10px}
+  .ayah-meta .ctrl{width:30px;height:30px;border-radius:999px;border:1px solid var(--line-2);display:grid;place-items:center;cursor:pointer}
+  .ayah-meta .ctrl:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .ayah-meta .ctrl svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+  /* module grid */
+  .modules{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:880px){.modules{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.modules{grid-template-columns:1fr}}
+  .mod{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;transition:all .25s;cursor:default;min-height:220px;display:flex;flex-direction:column;gap:12px}
+  .mod:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .mod .num{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--mute);letter-spacing:.06em}
+  .mod h4{font-size:1.12rem;letter-spacing:-.015em;font-weight:500}
+  .mod p{font-size:.88rem;color:var(--ink-2);line-height:1.5;flex:1}
+  .mod .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .mod .tags span{font-size:.68rem;padding:2px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--mute)}
+
+  /* sedekah row demo */
+  .seda{display:flex;flex-direction:column;gap:18px}
+  .seda .ring{display:flex;gap:8px;flex-wrap:wrap}
+  .seda .ring .r{width:28px;height:28px;border-radius:999px;border:1.5px solid var(--line-2);position:relative;display:grid;place-items:center;font-size:.62rem;color:var(--mute);font-weight:500}
+  .seda .ring .r.d{background:var(--green);border-color:var(--green);color:var(--paper)}
+  .seda .ring .r.today{border-color:var(--ink);border-width:2px;color:var(--ink)}
+  .seda-chart{height:120px;position:relative;margin-top:12px}
+  .seda-chart svg{width:100%;height:100%}
+
+  /* privacy / closer */
+  .philo{background:var(--ink);color:var(--bg);border-radius:24px;padding:80px 56px;position:relative;overflow:hidden}
+  @media(max-width:720px){.philo{padding:56px 28px;border-radius:18px}}
+  .philo .eyebrow{border-color:#2a2a2a;color:#d6d3d1}
+  .philo h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.025em;font-weight:500;line-height:1.08;margin:22px 0 28px;max-width:20ch}
+  .philo h2 .serif{color:var(--green)}
+  .philo .g{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:flex-start}
+  @media(max-width:820px){.philo .g{grid-template-columns:1fr}}
+  .philo p{color:#d6d3d1;line-height:1.55;font-size:1.02rem;max-width:50ch}
+  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#2a2a2a;border-radius:12px;overflow:hidden;border:1px solid #2a2a2a}
+  .pillars .p{background:var(--ink);padding:22px;display:flex;flex-direction:column;gap:8px}
+  .pillars .p .mono{color:var(--green)}
+  .pillars .p .t{font-size:.98rem;font-weight:500}
+  .pillars .p .d{color:#a8a29e;font-size:.82rem;line-height:1.45}
+
+  /* footer */
+  footer{max-width:1240px;margin:0 auto;padding:72px 32px 56px;border-top:1px solid var(--line)}
+  .foot-grid{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .foot-grid .tag{font-size:.78rem;color:var(--mute)}
+  .foot-grid .sig{font-family:'Instrument Serif',serif;font-style:italic;color:var(--ink-2)}
+  .quran-ref{font-family:'Instrument Serif',serif;font-style:italic;font-size:1rem;color:var(--mute)}
+
+  /* module CTA big */
+  .big-cta{text-align:center;padding:100px 32px 80px;max-width:900px;margin:0 auto}
+  .big-cta .mono{margin-bottom:18px}
+  .big-cta h2{font-size:clamp(2.2rem,4.5vw,3.8rem);letter-spacing:-.03em;font-weight:500;line-height:1.06}
+  .big-cta h2 .serif{color:var(--green-deep)}
+  .big-cta p{margin:22px auto 32px;max-width:46ch;color:var(--ink-2);font-size:1.08rem;line-height:1.55}
+
+  /* subtle grid background behind hero (removed for cleanliness) */
+</style>
+</head>
+<body>
+
+<!-- ───────── nav ───────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="brand">
+      <span style="font-weight:600;letter-spacing:-.01em;font-size:1.02rem">RIHLAH</span>
+    </div>
+    <div class="nav-links">
+      <a href="#philosophy">Philosophy</a>
+      <a href="#track">Track</a>
+      <a href="#stats">Stats</a>
+      <a href="#stats-detail">Stats</a>
+      <a href="#modules">All modules</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#download" class="btn btn-solid">Get the app →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ───────── hero ───────── -->
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow"><span class="pulse"></span> Local-first · No account required</div>
+      <h1>A quiet companion <br>for your <span class="serif">spiritual</span> journey.</h1>
+      <p class="lede">Rihlah is a private tracker for the five daily prayers, Quran reading, sedekah, fasting, and the small habits that shape a life. It counts — it doesn't judge.</p>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="#track">See how it works →</a>
+        <a class="btn btn-ghost" href="#philosophy">Why we built it</a>
+      </div>
+      <div class="hero-meta">
+        <div><div class="k">9</div><div class="v">modular tabs</div></div>
+        <div><div class="k">0</div><div class="v">accounts, cloud, ads</div></div>
+        <div><div class="k">114</div><div class="v">surahs, Uthmani script</div></div>
+        <div><div class="k">40d</div><div class="v">habit challenges</div></div>
+      </div>
+    </div>
+
+    <!-- hero data viz panel -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- top row: quality score + mujahadah bars -->
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px">
+        <!-- quality score card -->
+        <div style="background:var(--ink);border-radius:18px;padding:26px 22px;display:flex;flex-direction:column;justify-content:space-between;min-height:180px">
+          <div style="font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#71717a;font-weight:500">Daily score</div>
+          <div style="font-size:5rem;font-weight:500;color:var(--paper);letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums">84</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:8px">
+            <span style="font-size:.72rem;color:var(--green);font-weight:500">↑ +11</span>
+            <span style="font-size:.72rem;color:#52525b">from last week</span>
+          </div>
+        </div>
+
+        <!-- mujahadah bar chart -->
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px">
+          <div style="font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-bottom:14px">Mujahadah · 14 days</div>
+          <div style="display:flex;align-items:flex-end;gap:5px;height:96px" id="heroMujBars"></div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:.66rem;color:var(--mute)">
+            <span>Apr 7</span><span>Today</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- middle: trend line chart -->
+      <div style="background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:500">Prayer quality · 4 weeks</div>
+          <div style="display:flex;gap:14px;font-size:.7rem">
+            <span style="color:oklch(0.68 0.14 160)">— Fajr</span>
+            <span style="color:oklch(0.62 0.12 220)">— Dhuhr</span>
+            <span style="color:var(--mute)">— Avg</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 520 80" preserveAspectRatio="none" style="width:100%;height:70px">
+          <defs>
+            <linearGradient id="trendGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="oklch(0.68 0.14 160)" stop-opacity=".14"/>
+              <stop offset="100%" stop-color="oklch(0.68 0.14 160)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- avg fill -->
+          <path d="M0 52 L37 48 L74 44 L111 46 L148 40 L185 38 L222 34 L259 32 L296 28 L333 26 L370 22 L407 20 L444 18 L481 16 L520 14 L520 80 L0 80Z" fill="url(#trendGrad)"/>
+          <!-- avg line -->
+          <path d="M0 52 L37 48 L74 44 L111 46 L148 40 L185 38 L222 34 L259 32 L296 28 L333 26 L370 22 L407 20 L444 18 L481 16 L520 14" stroke="oklch(0.68 0.14 160)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- fajr line -->
+          <path d="M0 58 L37 54 L74 50 L111 52 L148 44 L185 42 L222 36 L259 30 L296 26 L333 22 L370 18 L407 15 L444 12 L481 10 L520 8" stroke="oklch(0.62 0.12 220)" stroke-width="1.5" fill="none" stroke-dasharray="4,3" stroke-linecap="round"/>
+          <!-- grid lines -->
+          <line x1="0" y1="20" x2="520" y2="20" stroke="var(--line)" stroke-width=".5"/>
+          <line x1="0" y1="40" x2="520" y2="40" stroke="var(--line)" stroke-width=".5"/>
+          <line x1="0" y1="60" x2="520" y2="60" stroke="var(--line)" stroke-width=".5"/>
+          <text x="0" y="18" font-size="8" fill="var(--mute)" font-family="JetBrains Mono">100%</text>
+          <text x="0" y="38" font-size="8" fill="var(--mute)" font-family="JetBrains Mono">75%</text>
+          <text x="0" y="58" font-size="8" fill="var(--mute)" font-family="JetBrains Mono">50%</text>
+        </svg>
+      </div>
+
+      <!-- bottom row: istiqamah mini heatmap + streak stats -->
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px">
+        <!-- heatmap -->
+        <div style="background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px">
+          <div style="font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-bottom:12px">Istiqamah · this year</div>
+          <div class="heat" id="heroHeat" style="grid-template-columns:repeat(26,1fr);gap:2px"></div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:.66rem;color:var(--mute)">
+            <span>Jan</span><span>Apr</span>
+          </div>
+        </div>
+        <!-- streak stats -->
+        <div style="background:var(--green-soft);border:1px solid oklch(0.88 0.06 160);border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;justify-content:space-between">
+          <div style="font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green-deep);font-weight:500">Streak</div>
+          <div style="font-size:3.2rem;font-weight:500;color:var(--ink);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums">47<span style="font-size:1.1rem;color:var(--mute);font-weight:400">d</span></div>
+          <div style="font-size:.8rem;color:var(--green-deep)">Best: 62 days</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- ───────── philosophy ───────── -->
+<section id="philosophy">
+  <div class="sec-head">
+    <h2>Tracking, not <span class="serif">shaming</span>. Privacy, not profile.</h2>
+    <div class="note">Most habit apps are built for productivity. This one is built for presence — the quiet work of showing up five times a day, every day, for the rest of your life.</div>
+  </div>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="num">01</div>
+      <h3>Local-first, by design.</h3>
+      <p>Every prayer log, journal entry, and Quran bookmark lives in a SQLite database on your device. No sync, no server, no account to create.</p>
+      <div class="foot">0 bytes leave your phone</div>
+    </div>
+    <div class="principle">
+      <div class="num">02</div>
+      <h3>Non-judgmental counting.</h3>
+      <p>Miss a prayer and nothing shatters. Streaks have freezes. Period days don't count against you. The app records — how you read it is between you and Allah.</p>
+      <div class="foot">No red days, no shame</div>
+    </div>
+    <div class="principle">
+      <div class="num">03</div>
+      <h3>Modular, to your practice.</h3>
+      <p>Nine tabs — only two are permanent. Turn on Wirid, Fasting, Sedekah, Give only if they serve your amal. Everything else disappears.</p>
+      <div class="foot">Two pinned, seven optional</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Track feature ───────── -->
+<section id="track" style="padding-top:40px">
+  <div class="feat">
+    <div class="feat-copy">
+      <span class="mono">01 — Track</span>
+      <h3>Quality, not just quantity.</h3>
+      <p>Each of the five daily prayers carries four lightweight attributes: <b>performed</b>, <b>early</b> (within 20 minutes of adhan), <b>jemaah</b> (in congregation), and <b>mosque</b>. Tap the ones that apply — your day's score lifts accordingly.</p>
+      <p>Add custom prayers for Dhuha, Tahajjud, Witr. Log amalan — pages of Quran, dhikr, sedekah — with daily goals. Attach a reflection to any prayer: a feeling, a verse, a photo.</p>
+      <ul>
+        <li>Per-prayer journal with emotion and khusyuk tags (zahir, aql, qalb)</li>
+        <li>Custom amalan with goals, units, and active days</li>
+        <li>Period mode: prayers muted, streak preserved</li>
+      </ul>
+    </div>
+    <div class="feat-demo">
+      <div class="demo-label"><span>Track · Monday</span><span>Score 84</span></div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--bg);border-radius:12px;border:1px solid var(--line)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="check on"></div>
+            <div>
+              <div style="font-weight:500;font-size:.96rem">Fajr</div>
+              <div style="font-size:.74rem;color:var(--mute);margin-top:2px">5:42 AM · within adhan</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:5px"><span class="tag">early</span><span class="tag">jemaah</span><span class="tag">mosque</span></div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--bg);border-radius:12px;border:1px solid var(--line)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="check on"></div>
+            <div>
+              <div style="font-weight:500;font-size:.96rem">Dhuhr</div>
+              <div style="font-size:.74rem;color:var(--mute);margin-top:2px">13:08 · at desk</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:5px"><span class="tag muted">performed</span></div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--paper);border-radius:12px;border:1.5px solid var(--ink)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="check"></div>
+            <div>
+              <div style="font-weight:500;font-size:.96rem">Asr</div>
+              <div style="font-size:.74rem;color:var(--mute);margin-top:2px">16:31 · tap to log</div>
+            </div>
+          </div>
+          <div style="font-size:.74rem;color:var(--mute)">in 38 min</div>
+        </div>
+
+        <div style="margin-top:10px;padding:14px 16px;background:var(--green-soft);border-radius:12px;border:1px solid oklch(0.88 0.06 160)">
+          <div style="font-size:.72rem;color:var(--green-deep);letter-spacing:.04em;text-transform:uppercase;font-weight:600;margin-bottom:6px">Journal · Fajr</div>
+          <div class="serif" style="color:var(--ink-2);font-size:1rem;line-height:1.4">"Walked to the mosque in the cold. Quiet rukuʿ. Remembered Surah al-ʿAsr on the way back."</div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="st"><div class="n">4<small>/5</small></div><div class="lb">Prayers</div></div>
+        <div class="st"><div class="n">12<small>pg</small></div><div class="lb">Quran today</div></div>
+        <div class="st"><div class="n">47</div><div class="lb">Streak</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────── Stats feature ───────── -->
+  <div id="stats" class="feat rev">
+    <div class="feat-copy">
+      <span class="mono">02 — Stats</span>
+      <h3>A year at a glance, <br>a day in detail.</h3>
+      <p>A contribution heatmap shows every day you've shown up, shaded by quality. A radar chart plots six dimensions — solat, khusyu, jamaah, Quran, sunnah, qada — side by side, so you can see where your spiritual rhythm leans.</p>
+      <p>The daily quality score is the weighted sum of everything you tracked. Patterns emerge: you pray at mosque more on weekends, khusyuk dips after late nights, Fajr recovers on the 11th day of every challenge.</p>
+      <ul>
+        <li>Year-long contribution grid (GitHub-style, color-coded by score)</li>
+        <li>Spiritual radar with 6 user-selectable axes</li>
+        <li>Weekly report: best day, hardest day, one recommendation</li>
+      </ul>
+    </div>
+    <div class="feat-demo">
+      <div class="demo-label"><span>Stats · 2026</span><span>182/365 days</span></div>
+
+      <div class="heat" id="heatmap"></div>
+
+      <div class="heat-legend">
+        <div>Jan</div>
+        <div class="scale">
+          Less
+          <div class="c"></div>
+          <div class="c l1"></div>
+          <div class="c l2"></div>
+          <div class="c l3"></div>
+          <div class="c l4"></div>
+          More
+        </div>
+        <div>Dec</div>
+      </div>
+
+      <div class="stat-row" style="grid-template-columns:repeat(4,1fr)">
+        <div class="st"><div class="n">84<small>%</small></div><div class="lb">Quality avg</div></div>
+        <div class="st"><div class="n">62<small>%</small></div><div class="lb">Jemaah</div></div>
+        <div class="st"><div class="n">38<small>%</small></div><div class="lb">At mosque</div></div>
+        <div class="st"><div class="n">47</div><div class="lb">Streak</div></div>
+      </div>
+
+      <div style="margin-top:18px;padding:14px;background:var(--bg);border:1px dashed var(--line-2);border-radius:10px;font-size:.84rem;color:var(--ink-2);line-height:1.5">
+        <span class="mono" style="font-size:.66rem;color:var(--green-deep);display:block;margin-bottom:4px">Weekly observation</span>
+        Fajr at mosque rose 3 days → 5 days this week. Your score lifted 11 points without adding a single new habit.
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────── Stats full section ───────── -->
+  <div id="stats-detail" style="margin-bottom:140px">
+    <div class="feat-copy" style="margin-bottom:48px">
+      <span class="mono" style="display:block;margin-bottom:18px">03 — Stats</span>
+      <h3 style="font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.025em;font-weight:500;line-height:1.1;margin-bottom:18px">Your practice, <span class="serif">made visible.</span></h3>
+      <p style="font-size:1.04rem;color:var(--ink-2);line-height:1.55;max-width:54ch">Three lenses on the same data: how you're trending, how hard you're trying relative to your own baseline, and how consistently you show up across the year.</p>
+    </div>
+
+    <!-- Trendlines full-width -->
+    <div class="feat-demo" style="margin-bottom:20px;min-height:auto">
+      <div class="demo-label"><span>Trendlines · 28 days</span><span>All 5 prayers</span></div>
+      <svg viewBox="0 0 800 160" preserveAspectRatio="none" style="width:100%;height:160px">
+        <defs>
+          <linearGradient id="tGrad2" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="oklch(0.68 0.14 160)" stop-opacity=".12"/>
+            <stop offset="100%" stop-color="oklch(0.68 0.14 160)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- grid -->
+        <line x1="0" y1="32" x2="800" y2="32" stroke="var(--line)" stroke-width=".8"/>
+        <line x1="0" y1="80" x2="800" y2="80" stroke="var(--line)" stroke-width=".8"/>
+        <line x1="0" y1="128" x2="800" y2="128" stroke="var(--line)" stroke-width=".8"/>
+        <text x="4" y="30" font-size="9" fill="var(--mute)" font-family="JetBrains Mono">100%</text>
+        <text x="4" y="78" font-size="9" fill="var(--mute)" font-family="JetBrains Mono">75%</text>
+        <text x="4" y="126" font-size="9" fill="var(--mute)" font-family="JetBrains Mono">50%</text>
+        <!-- overall fill -->
+        <path d="M0 100 L57 92 L114 86 L171 88 L228 78 L285 72 L342 64 L399 58 L456 50 L513 44 L570 38 L627 32 L684 28 L742 24 L800 20 L800 160 L0 160Z" fill="url(#tGrad2)"/>
+        <!-- overall avg -->
+        <path d="M0 100 L57 92 L114 86 L171 88 L228 78 L285 72 L342 64 L399 58 L456 50 L513 44 L570 38 L627 32 L684 28 L742 24 L800 20" stroke="oklch(0.68 0.14 160)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <!-- fajr -->
+        <path d="M0 110 L57 104 L114 96 L171 100 L228 86 L285 80 L342 68 L399 55 L456 44 L513 38 L570 30 L627 24 L684 18 L742 14 L800 10" stroke="oklch(0.55 0.14 200)" stroke-width="1.4" fill="none" stroke-dasharray="5,3" stroke-linecap="round"/>
+        <!-- dhuhr -->
+        <path d="M0 94 L57 88 L114 82 L171 84 L228 76 L285 70 L342 62 L399 56 L456 52 L513 46 L570 42 L627 36 L684 32 L742 28 L800 24" stroke="oklch(0.72 0.10 130)" stroke-width="1.4" fill="none" stroke-dasharray="3,4" stroke-linecap="round" opacity=".7"/>
+        <!-- asr, more volatile -->
+        <path d="M0 105 L57 98 L114 108 L171 92 L228 84 L285 90 L342 72 L399 66 L456 58 L513 62 L570 48 L627 42 L684 36 L742 30 L800 26" stroke="oklch(0.78 0.14 75)" stroke-width="1.2" fill="none" stroke-dasharray="2,4" stroke-linecap="round" opacity=".6"/>
+        <!-- week labels -->
+        <text x="0" y="155" font-size="9" fill="var(--mute)" font-family="JetBrains Mono">Week 1</text>
+        <text x="190" y="155" font-size="9" fill="var(--mute)" font-family="JetBrains Mono">Week 2</text>
+        <text x="390" y="155" font-size="9" fill="var(--mute)" font-family="JetBrains Mono">Week 3</text>
+        <text x="590" y="155" font-size="9" fill="var(--mute)" font-family="JetBrains Mono">Week 4</text>
+        <!-- legend -->
+        <circle cx="680" cy="12" r="4" fill="oklch(0.68 0.14 160)"/>
+        <text x="688" y="16" font-size="9" fill="var(--ink-2)" font-family="JetBrains Mono">Overall</text>
+        <circle cx="730" cy="12" r="4" fill="oklch(0.55 0.14 200)"/>
+        <text x="738" y="16" font-size="9" fill="var(--ink-2)" font-family="JetBrains Mono">Fajr</text>
+        <circle cx="762" cy="12" r="4" fill="oklch(0.78 0.14 75)"/>
+        <text x="770" y="16" font-size="9" fill="var(--ink-2)" font-family="JetBrains Mono">Asr</text>
+      </svg>
+    </div>
+
+    <!-- Mujahadah + Istiqamah side by side -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+      <!-- Mujahadah card — translated from MujahadahCard.tsx -->
+      <div class="feat-demo" style="min-height:auto;padding:0;overflow:hidden">
+        <!-- Header -->
+        <div style="padding:20px 20px 14px;display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-size:1.2rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:4px">Mujahada</div>
+            <div style="font-size:2.4rem;font-weight:300;letter-spacing:-.06em;line-height:1;color:var(--ink)">72<span style="font-size:1rem;color:var(--mute);font-weight:400"> / 100</span></div>
+          </div>
+          <div style="padding:5px 10px;border-radius:8px;background:#fff7f7;border:1px solid #fca5a5;font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#dc2626;white-space:nowrap">↓ 16 VS YESTERDAY</div>
+        </div>
+
+        <!-- Chart area -->
+        <div style="background:var(--bg);padding:12px 0">
+          <svg id="mujSvg" width="100%" height="220" viewBox="0 0 360 220" preserveAspectRatio="xMidYMid meet" style="display:block"></svg>
+        </div>
+
+        <!-- Summary -->
+        <div style="padding:16px 20px">
+          <div style="display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:12px">
+            <div style="width:8px;height:8px;border-radius:999px;background:#ef4444;flex-shrink:0"></div>
+            <div style="font-size:.82rem;color:var(--ink)">1 pt above your baseline</div>
+          </div>
+          <div style="font-size:.8rem;color:var(--mute);line-height:1.5;margin-bottom:14px">You're just above your baseline. A solid session today builds momentum for tomorrow.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <div style="padding:13px;border-radius:12px;border:1px solid var(--line)">
+              <div class="mono" style="margin-bottom:6px">Your Floor</div>
+              <div style="font-size:1.4rem;font-weight:300;letter-spacing:-.03em">71</div>
+              <div style="font-size:.7rem;color:var(--mute);margin-top:2px">personal baseline</div>
+            </div>
+            <div style="padding:13px;border-radius:12px;border:1px solid var(--line)">
+              <div class="mono" style="margin-bottom:6px">Yesterday</div>
+              <div style="font-size:1.4rem;font-weight:300;letter-spacing:-.03em">87</div>
+              <div style="font-size:.7rem;color:var(--mute);margin-top:2px">for comparison</div>
+            </div>
+          </div>
+          <!-- Speed control -->
+          <div style="border-top:1px solid var(--line);padding-top:13px">
+            <div class="mono" style="margin-bottom:8px">Floor Rise Speed</div>
+            <div style="display:flex;gap:6px">
+              <div style="flex:1;padding:7px;text-align:center;border-radius:8px;border:1px solid var(--line);font-size:.68rem;font-weight:700;letter-spacing:.06em;color:var(--mute)">GRADUAL</div>
+              <div style="flex:1;padding:7px;text-align:center;border-radius:8px;border:1.5px solid var(--ink);background:var(--ink);font-size:.68rem;font-weight:700;letter-spacing:.06em;color:var(--paper)">STANDARD</div>
+              <div style="flex:1;padding:7px;text-align:center;border-radius:8px;border:1px solid var(--line);font-size:.68rem;font-weight:700;letter-spacing:.06em;color:var(--mute)">AGGRESSIVE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Istiqamah card — translated from StabilityCard.tsx -->
+      <div class="feat-demo" style="min-height:auto;padding:0;overflow:hidden">
+        <!-- Header -->
+        <div style="padding:22px 22px 14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px">
+            <div style="font-size:1.2rem;font-weight:700;letter-spacing:-.02em;color:var(--ink)">Istiqamah</div>
+          </div>
+          <!-- Ring + VS Yesterday -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0 8px 16px">
+            <!-- Ring -->
+            <svg width="100" height="100" viewBox="0 0 100 100" style="flex-shrink:0">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" stroke-width="8"/>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="oklch(0.68 0.14 160)" stroke-width="8"
+                stroke-dasharray="263.9 263.9" stroke-dashoffset="126.7" stroke-linecap="round"
+                transform="rotate(-90 50 50)"/>
+              <text x="50" y="56" text-anchor="middle" font-size="19" font-weight="700" fill="oklch(0.68 0.14 160)" font-family="Inter,sans-serif">52%</text>
+            </svg>
+            <!-- KPIs -->
+            <div style="text-align:right">
+              <div class="mono" style="margin-bottom:5px">VS Yesterday</div>
+              <div style="display:flex;align-items:center;gap:3px;justify-content:flex-end">
+                <span style="font-size:1.3rem;color:#ef4444">↘</span>
+                <span style="font-size:1.4rem;font-weight:300;letter-spacing:-.04em;color:#ef4444">39%</span>
+              </div>
+              <div style="font-size:.7rem;color:var(--mute);margin-top:2px">dropped</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizon chart area -->
+        <div style="background:var(--bg)">
+          <svg id="stabSvg" width="100%" height="160" viewBox="0 0 360 160" preserveAspectRatio="none" style="display:block"></svg>
+          <!-- Footer -->
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 22px 18px">
+            <div style="font-size:.68rem;font-weight:700;letter-spacing:.08em;color:var(--mute)">30 DAYS AGO</div>
+            <div style="padding:4px 10px;border-radius:6px;border:1px solid var(--line);background:var(--paper)">
+              <span style="font-size:.68rem;font-weight:700;letter-spacing:.08em;color:var(--mute)">RISING TREND DETECTED</span>
+            </div>
+            <div style="font-size:.68rem;font-weight:700;letter-spacing:.08em;color:var(--mute)">TODAY</div>
+          </div>
+
+          <!-- Daily breakdown -->
+          <div style="padding:0 22px 22px" id="stabBreakdown">
+            <div class="mono" style="margin-bottom:12px">Daily Breakdown</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───────── Challenges feature ───────── -->
+  <div class="feat rev">
+    <div class="feat-copy">
+      <span class="mono">04 — Challenges</span>
+      <h3>Forty days, one niyyah.</h3>
+      <p>Commit to a single intention — Fajr on time, a daily juz, fifteen minutes of dhikr — and see it through. Pre-built templates or fully custom. Each challenge has its own personal doa and an optional tawassul shown at check-in.</p>
+      <p>A full-screen check-in modal marks the day with a single, satisfying tap. Green ripple rings on completion. The momentum graph shows your cumulative days. Milestones at 7, 21, 40 celebrate quietly.</p>
+      <ul>
+        <li>Templates: Fajr on time, Daily Quran, or custom length</li>
+        <li>Pause, resume, restart — the life you have, not the life you planned</li>
+        <li>Retroactive check-ins for when the day ran away</li>
+      </ul>
+    </div>
+    <div class="feat-demo">
+      <div class="demo-label"><span>Challenge · Day 25 of 40</span><span>62% consistency</span></div>
+
+      <div class="chal">
+        <div class="chal-head">
+          <div class="t">Fajr on time</div>
+          <div class="d">25 / 40</div>
+        </div>
+        <div class="chal-bar"><div class="fill"></div></div>
+
+        <div class="chal-grid" id="chalGrid"></div>
+
+        <div class="chal-foot">
+          <div>25 days done · 15 to go</div>
+          <div style="color:var(--green-deep);font-weight:500">Milestone 21 ✓</div>
+        </div>
+
+        <div style="margin-top:18px;padding:16px;background:var(--bg);border:1px solid var(--line);border-radius:12px">
+          <div class="mono" style="font-size:.66rem;color:var(--green-deep);margin-bottom:6px">Personal doa</div>
+          <div class="serif" style="color:var(--ink-2);font-size:1.05rem;line-height:1.4">"Ya Allah, make the dawn a time I meet You, not a time I sleep through."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────── Sedekah feature ───────── -->
+  <div class="feat">
+    <div class="feat-copy">
+      <span class="mono">05 — Sedekah</span>
+      <h3>Give daily. Witness the return.</h3>
+      <p>Sedekah Subuh, the morning practice of giving before sunrise, gets its own cycle grid. Set a daily amount or a monthly total divided by days. Tap once to mark given.</p>
+      <p>Rolling sedekah logs opportunistic giving — the bonus that came in, the portion set aside, the recipient. And the Barakah Witness log captures the returns: unexpected money, cost avoided, help that arrived on time. You'll see the pattern.</p>
+      <ul>
+        <li>Monthly cycle grid with reset that preserves history</li>
+        <li>Given vs. Return line chart, side by side</li>
+        <li>Channel: cash, transfer, in-kind — with notes</li>
+      </ul>
+    </div>
+    <div class="feat-demo">
+      <div class="demo-label"><span>Sedekah · Apr cycle</span><span>19 / 30 days</span></div>
+
+      <div class="seda">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <div>
+            <div style="font-size:.74rem;color:var(--mute);letter-spacing:.04em;text-transform:uppercase">Month total</div>
+            <div style="font-size:1.8rem;font-weight:500;letter-spacing:-.02em;margin-top:4px">RM 475<span style="color:var(--mute);font-size:1rem;font-weight:400"> / 750</span></div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:.74rem;color:var(--mute);letter-spacing:.04em;text-transform:uppercase">Barakah witnessed</div>
+            <div style="font-size:1.8rem;font-weight:500;letter-spacing:-.02em;margin-top:4px;color:var(--green-deep)">RM 1,240</div>
+          </div>
+        </div>
+
+        <div class="ring" id="sedaRing"></div>
+
+        <div class="seda-chart">
+          <svg viewBox="0 0 400 120" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="gradG" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="oklch(0.68 0.14 160)" stop-opacity=".22"/>
+                <stop offset="100%" stop-color="oklch(0.68 0.14 160)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M 0 80 L 40 72 L 80 78 L 120 60 L 160 64 L 200 50 L 240 58 L 280 40 L 320 46 L 360 30 L 400 34 L 400 120 L 0 120 Z" fill="url(#gradG)"/>
+            <path d="M 0 80 L 40 72 L 80 78 L 120 60 L 160 64 L 200 50 L 240 58 L 280 40 L 320 46 L 360 30 L 400 34" stroke="var(--green-deep)" stroke-width="1.8" fill="none"/>
+            <path d="M 0 95 L 40 92 L 80 88 L 120 85 L 160 82 L 200 80 L 240 75 L 280 72 L 320 68 L 360 66 L 400 64" stroke="var(--mute)" stroke-width="1" fill="none" stroke-dasharray="3,3"/>
+            <text x="4" y="12" font-size="9" fill="var(--mute)" font-family="JetBrains Mono">RETURN</text>
+            <text x="4" y="110" font-size="9" fill="var(--green-deep)" font-family="JetBrains Mono">GIVEN</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Wirid feature ───────── -->
+<section id="wirid" style="padding-top:0">
+  <div class="feat rev">
+    <div class="feat-copy">
+      <span class="mono">06 — Wirid</span>
+      <h3>Your personal <span class="serif">awrad</span>, structured.</h3>
+      <p>Wirid lets you build and commit to a daily spiritual routine — a structured sequence of acts of worship you intend to keep. The Musabbihin Protocol comes pre-loaded: a night-time practice rooted in the sunnah of tasbih, tahajjud, and the quiet before Fajr.</p>
+      <p>Create unlimited custom protocols with your own steps, Quranic references, and personal doa. Each protocol tracks your daily check-ins, cumulative momentum, and 30-day completion rate.</p>
+      <ul>
+        <li>Per-step references: Hadith, Quran ayah, or custom note</li>
+        <li>Performance chart: daily / weekly / monthly views</li>
+        <li>Momentum graph: cumulative full days toward a goal</li>
+        <li>Activity log: what you completed and when</li>
+      </ul>
+    </div>
+    <div class="feat-demo" style="background:var(--paper);border-color:#1a1a1a;padding:28px">
+
+      <!-- protocol header -->
+      <div style="margin-bottom:20px">
+        <div style="font-size:1.3rem;font-weight:500;color:var(--ink);letter-spacing:-.02em">Musabbihin Protocol</div>
+        <div style="font-size:.84rem;color:var(--mute);margin-top:4px">Bertasbih dalam gelap. Macam Nabi Yunus. Bangun jugak.</div>
+      </div>
+
+      <!-- today card -->
+      <div style="background:var(--bg);border-radius:14px;padding:18px;margin-bottom:14px">
+        <div style="font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-bottom:8px">Today</div>
+        <div style="font-size:2.2rem;font-weight:500;color:var(--ink);letter-spacing:-.03em;line-height:1">2<span style="font-size:1rem;color:var(--mute);font-weight:400"> / 6 steps</span></div>
+        <div style="height:4px;background:var(--line);border-radius:999px;margin:12px 0 14px;overflow:hidden">
+          <div style="height:100%;width:33%;background:oklch(0.68 0.14 160);border-radius:999px"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:8px;overflow:hidden">
+          <div style="background:var(--bg);padding:10px 8px"><div style="font-size:.62rem;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">Streak</div><div style="font-size:.96rem;font-weight:500;color:var(--ink)">0d</div></div>
+          <div style="background:var(--bg);padding:10px 8px"><div style="font-size:.62rem;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">30d rate</div><div style="font-size:.96rem;font-weight:500;color:var(--ink)">7%</div></div>
+          <div style="background:var(--bg);padding:10px 8px"><div style="font-size:.62rem;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">Steps</div><div style="font-size:.96rem;font-weight:500;color:var(--ink)">6</div></div>
+          <div style="background:var(--bg);padding:10px 8px"><div style="font-size:.62rem;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px">Since</div><div style="font-size:.78rem;font-weight:500;color:var(--ink)">6 Apr</div></div>
+        </div>
+      </div>
+
+      <!-- steps list -->
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <div style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--green);background:oklch(0.68 0.14 160);display:grid;place-items:center;flex-shrink:0">
+            <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div style="flex:1"><div style="font-size:.88rem;font-weight:500;color:var(--ink)">Solat Sunat Tasbih</div><div style="font-size:.72rem;color:var(--mute);margin-top:2px">HR Abu Dawud &amp; Ibn Majah</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <div style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--green);background:oklch(0.68 0.14 160);display:grid;place-items:center;flex-shrink:0">
+            <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div style="flex:1"><div style="font-size:.88rem;font-weight:500;color:var(--ink)">Solat Sunat Tahajud</div><div style="font-size:.72rem;color:var(--mute);margin-top:2px">Al-Isra: 79</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <div style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--line-2);flex-shrink:0"></div>
+          <div style="flex:1"><div style="font-size:.88rem;font-weight:500;color:var(--mute)">Qabliyah Subuh</div><div style="font-size:.72rem;color:var(--mute);margin-top:2px">At-Tur: 49</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:10px">
+          <div style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--line-2);flex-shrink:0"></div>
+          <div style="flex:1"><div style="font-size:.88rem;font-weight:500;color:var(--mute)">Subuh Berjemaah</div><div style="font-size:.72rem;color:var(--mute);margin-top:2px">Hadith Riwayat Muslim</div></div>
+        </div>
+      </div>
+
+      <!-- momentum mini chart -->
+      <div style="background:var(--bg);border-radius:12px;padding:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:500">Momentum</div>
+          <div style="font-size:.72rem;color:oklch(0.68 0.14 160);font-family:'JetBrains Mono',monospace">2 / 14 Days</div>
+        </div>
+        <svg viewBox="0 0 300 60" style="width:100%;height:50px">
+          <defs>
+            <linearGradient id="momGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="oklch(0.68 0.14 160)" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="oklch(0.68 0.14 160)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="55" x2="300" y2="55" stroke="var(--line)" stroke-width="1"/>
+          <!-- goal dashed line -->
+          <line x1="0" y1="8" x2="300" y2="8" stroke="var(--line)" stroke-width="1" stroke-dasharray="4,3"/>
+          <!-- actual cumulative: slow start, 2 days completed so far -->
+          <path d="M0 55 L40 55 L80 52 L120 50 L160 50 L200 50 L240 50 L300 50 L300 55 L0 55Z" fill="url(#momGrad)"/>
+          <path d="M0 55 L40 55 L80 52 L120 50 L160 50 L200 50 L240 50 L300 50" stroke="oklch(0.68 0.14 160)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <text x="2" y="53" font-size="7" fill="var(--mute)" font-family="JetBrains Mono,monospace">Day 1</text>
+          <text x="265" y="53" font-size="7" fill="var(--mute)" font-family="JetBrains Mono,monospace">Day 14</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────── All modules grid ───────── -->
+<section id="modules">
+  <div class="sec-head">
+    <h2>Nine modules. <br>Only <span class="serif">two</span> are permanent.</h2>
+    <div class="note">Onboarding asks which parts of your practice you want to track. The rest stay hidden until you need them. Reorder or toggle any tab from More → Customize Tabs.</div>
+  </div>
+
+  <div class="modules">
+    <div class="mod" style="border:1.5px solid var(--ink)"><div class="num">01 · Pinned</div><h4>Track</h4><p>The home tab. Prayer logging, amalan counters, daily journal, calendar strip.</p><div class="tags"><span>Prayers</span><span>Amalan</span><span>Journal</span><span>Period mode</span></div></div>
+
+    <div class="mod"><div class="num">02 · Default</div><h4>Stats</h4><p>Quality score, contribution heatmap, spiritual radar, weekly report. Three sub-tabs: Insight, Trends, Patterns.</p><div class="tags"><span>Heatmap</span><span>Radar</span><span>Streak</span></div></div>
+
+    <div class="mod"><div class="num">03 · Default</div><h4>Challenges</h4><p>40-day spiritual commitments. Templates or custom. Personal doa at check-in.</p><div class="tags"><span>Templates</span><span>Milestones</span><span>Momentum</span></div></div>
+
+    <div class="mod"><div class="num">04 · Default</div><h4>Quran</h4><p>Read, memorize, revise. Uthmani script, audio recitation, SM-2 spaced repetition, forgetting curve.</p><div class="tags"><span>Hafs</span><span>Hifz</span><span>SM-2</span><span>Tajwid</span></div></div>
+
+    <div class="mod"><div class="num">05 · Optional</div><h4>Fasting</h4><p>Log Sunnah, Ramadan, Qada, and other fasts. Auto-highlights Mondays, Thursdays, Ayyam al-Bid, 6 Shawwal, Arafah.</p><div class="tags"><span>Sunnah</span><span>Qada</span><span>Ramadan</span></div></div>
+
+    <div class="mod"><div class="num">06 · Optional</div><h4>Sedekah</h4><p>Sedekah Subuh cycle, rolling sedekah log, Barakah Witness journal. Given vs. return chart.</p><div class="tags"><span>Subuh</span><span>Rolling</span><span>Barakah</span></div></div>
+
+    <div class="mod"><div class="num">07 · Optional</div><h4>Wirid</h4><p>Personal awrad protocols. Musabbihin pre-loaded. Create your own with steps, references, tawassul.</p><div class="tags"><span>Protocols</span><span>Awrad</span><span>Musabbihin</span></div></div>
+
+    <div class="mod"><div class="num">08 · Optional</div><h4>Give</h4><p>Directory of Malaysian charitable institutions via sedekah.je. QR codes, categories, distance.</p><div class="tags"><span>Masjid</span><span>Surau</span><span>Tahfiz</span></div></div>
+
+    <div class="mod" style="border:1.5px solid var(--ink)"><div class="num">09 · Pinned</div><h4>More</h4><p>Prayer settings, notifications, Qada manager, Qibla compass, Dua library, theme, tab customization, export.</p><div class="tags"><span>Qibla</span><span>Qada</span><span>Duas</span><span>Export</span></div></div>
+  </div>
+</section>
+
+<!-- ───────── Philosophy / privacy closer ───────── -->
+<section>
+  <div class="philo">
+    <div class="g">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span> On privacy</div>
+        <h2>Your practice is <span class="serif">between you</span> and your Creator.</h2>
+        <p>No analytics. No telemetry. No login. Everything — every prayer logged, every ayah memorized, every doa written — lives in a single SQLite file on your phone. Export it as CSV whenever you want. Uninstall the app and it's gone with you.</p>
+        <p style="margin-top:18px;color:#a8a29e;font-size:.92rem">Prayer times come from JAKIM or the Aladhan API. Institution data for the Give tab comes from sedekah.je. That is the extent of the network.</p>
+      </div>
+      <div class="pillars">
+        <div class="p"><div class="mono">Storage</div><div class="t">SQLite on device</div><div class="d">Structured, queryable, exportable. No cloud mirror.</div></div>
+        <div class="p"><div class="mono">Account</div><div class="t">None required</div><div class="d">No email, no phone, no sign-in. Ever.</div></div>
+        <div class="p"><div class="mono">Export</div><div class="t">JSON & CSV</div><div class="d">Take your data anywhere. Use it with AI tools, spreadsheets, whatever helps.</div></div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── big CTA ───────── -->
+<section id="download" class="big-cta">
+  <span class="mono">Begin the journey</span>
+  <h2>Rihlah means journey. <br>This one is <span class="serif">yours.</span></h2>
+  <p>Available on iOS and Android. Free, private, and quietly yours.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+    <a class="btn btn-solid" href="#" style="padding:14px 22px;font-size:.92rem">Download for iOS →</a>
+    <a class="btn btn-ghost" href="#" style="padding:14px 22px;font-size:.92rem">Download for Android</a>
+  </div>
+  <div class="quran-ref" style="margin-top:40px">"And whoever fears Allah — He will make for him a way out." <span style="opacity:.6">— Qur'an 65:2</span></div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="brand-dot"></div>
+      <div>
+        <span style="font-weight:600;letter-spacing:-.01em;font-size:.96rem">RIHLAH</span>
+      </div>
+    </div>
+    <div class="sig">Built quietly, in the spirit of ihsan.</div>
+    <div style="display:flex;gap:18px;font-size:.82rem;color:var(--mute)">
+      <a href="#">Privacy</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Build heatmap: 26 cols × 7 rows ≈ 182 cells
+  (function(){
+    const grid = document.getElementById('heatmap');
+    if(!grid) return;
+    const rows = 7, cols = 26;
+    // deterministic pseudo-random
+    let seed = 7919;
+    function rnd(){ seed = (seed*9301 + 49297) % 233280; return seed/233280; }
+    for(let i=0;i<rows*cols;i++){
+      const d = document.createElement('div');
+      d.className = 'c';
+      const r = rnd();
+      // trend upward over time
+      const boost = i/(rows*cols);
+      const v = r + boost*0.35;
+      if(v > 0.88) d.className += ' l4';
+      else if(v > 0.62) d.className += ' l3';
+      else if(v > 0.42) d.className += ' l2';
+      else if(v > 0.22) d.className += ' l1';
+      grid.appendChild(d);
+    }
+  })();
+
+  // Challenge 40-day grid
+  (function(){
+    const g = document.getElementById('chalGrid');
+    if(!g) return;
+    for(let i=1;i<=40;i++){
+      const d = document.createElement('div');
+      d.className = 'd';
+      if(i<=24) d.className += ' done';
+      if(i===25){ d.className += ' today'; d.textContent = '25'; }
+      else if(i===7||i===21||i===40) d.textContent = i;
+      g.appendChild(d);
+    }
+  })();
+
+  // Sedekah ring (30 days)
+  (function(){
+    const ring = document.getElementById('sedaRing');
+    if(!ring) return;
+    for(let i=1;i<=30;i++){
+      const r = document.createElement('div');
+      r.className = 'r';
+      if(i<=18) r.className += ' d';
+      if(i===19){ r.className += ' today'; r.textContent = 'T'; }
+      ring.appendChild(r);
+    }
+  })();
+
+  // Forgetting curve dots
+  (function(){
+    const g = document.getElementById('curveDots');
+    if(!g) return;
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const pts = [];
+    let s = 1234;
+    function rnd(){ s = (s*9301 + 49297) % 233280; return s/233280; }
+    for(let i=0;i<47;i++){
+      const x = 8 + rnd()*384;
+      // retention ~ decays with x, plus noise
+      const base = Math.exp(-x/180) * 180 + 10;
+      const y = base + (rnd()-.5)*50;
+      pts.push({x, y: Math.max(8, Math.min(195, y))});
+    }
+    pts.forEach((p)=>{
+      const c = document.createElementNS(svgNS,'circle');
+      c.setAttribute('cx', p.x);
+      c.setAttribute('cy', p.y);
+      c.setAttribute('r', 3.2);
+      // color by y (inverse retention). lower y = higher retention
+      let fill = 'oklch(0.68 0.14 160)'; // green
+      if(p.y > 130) fill = 'oklch(0.65 0.20 25)'; // red
+      else if(p.y > 80) fill = 'oklch(0.78 0.14 75)'; // amber
+      c.setAttribute('fill', fill);
+      c.setAttribute('stroke','white');
+      c.setAttribute('stroke-width','1');
+      g.appendChild(c);
+    });
+  })();
+
+  // Mujahadah bars (shared builder)
+  // ── Mujahada Chart (translated from MujahadahCard.tsx / MujahadahChart) ──
+  (function(){
+    const svg = document.getElementById('mujSvg');
+    if(!svg) return;
+    const W=360, H=220, padTop=16, padBottom=24, padLeft=32, padRight=18;
+    const chartH = H - padTop - padBottom;
+    const chartW = W - padLeft - padRight;
+
+    const data = [
+      {perf:62,floor:58},{perf:68,floor:59},{perf:55,floor:59},{perf:72,floor:60},
+      {perf:76,floor:61},{perf:70,floor:62},{perf:78,floor:63},{perf:74,floor:64},
+      {perf:82,floor:65},{perf:85,floor:66},{perf:80,floor:67},{perf:91,floor:68},
+      {perf:87,floor:70},{perf:72,floor:71}
+    ];
+
+    const ns = 'http://www.w3.org/2000/svg';
+    function el(tag, attrs={}){
+      const e=document.createElementNS(ns,tag);
+      for(const[k,v] of Object.entries(attrs)) e.setAttribute(k,v);
+      return e;
+    }
+
+    const scale = chartH / 100;
+    const currentFloor = data[data.length-1].floor;
+    const floorY = padTop + chartH - currentFloor * scale;
+    const barStep = chartW / data.length;
+    const barW = Math.max(4, barStep - 4);
+
+    // defs gradient for reach labels
+    const defs = el('defs');
+    svg.appendChild(defs);
+
+    // Y-axis labels
+    for(const[label,val] of [['100',100],['50',50],['0',0]]){
+      const y = padTop + chartH - val*scale;
+      const t = el('text',{x:padLeft-4,y:y+4,'font-size':'8','text-anchor':'end',fill:'#a1a1aa','font-family':'JetBrains Mono,monospace'});
+      t.textContent = label; svg.appendChild(t);
+      const line = el('line',{x1:padLeft,y1:y,x2:padLeft+chartW,y2:y,stroke:'#e4e4e7','stroke-width':'0.5'});
+      svg.appendChild(line);
+    }
+
+    // Baseline axis
+    svg.appendChild(el('line',{x1:padLeft,y1:padTop+chartH,x2:padLeft+chartW,y2:padTop+chartH,stroke:'#e4e4e7','stroke-width':'1'}));
+
+    // Dashed floor line
+    svg.appendChild(el('line',{x1:padLeft,y1:floorY,x2:padLeft+chartW,y2:floorY,stroke:'#a1a1aa','stroke-width':'1','stroke-dasharray':'4 3'}));
+    const floorLbl = el('text',{x:padLeft+chartW+3,y:floorY+3,'font-size':'7',fill:'#a1a1aa','font-family':'JetBrains Mono,monospace'});
+    floorLbl.textContent='floor'; svg.appendChild(floorLbl);
+
+    // Bars
+    const REACH_COLORS = {
+      max:'#059669', high:'#10b981', moderate:'#6ee7b7', below:'#f59e0b', struggling:'#ef4444'
+    };
+    function effortColor(reach){
+      if(reach>=20) return REACH_COLORS.max;
+      if(reach>=10) return REACH_COLORS.high;
+      if(reach>=0)  return REACH_COLORS.moderate;
+      if(reach>=-10) return REACH_COLORS.below;
+      return REACH_COLORS.struggling;
+    }
+
+    data.forEach((d,i)=>{
+      const reach = d.perf - d.floor;
+      const x = padLeft + i*barStep + (barStep-barW)/2;
+      const yBase = padTop + chartH;
+      const floorH = Math.max(0, d.floor*scale);
+      const reachH = Math.max(0, reach*scale);
+      const totalH = Math.max(1, d.perf*scale);
+      const isToday = i===data.length-1;
+      const isYesterday = i===data.length-2;
+      const reachColor = effortColor(reach);
+      const floorColor = isToday ? '#c4c4c7' : '#d4d4d8';
+
+      // Floor portion
+      if(floorH>0){
+        const r=el('rect',{x,y:yBase-floorH,width:barW,height:floorH,fill:floorColor,rx:'2'});
+        svg.appendChild(r);
+      }
+      // Reach portion
+      if(reach>0){
+        const r=el('rect',{x,y:yBase-floorH-reachH,width:barW,height:reachH,fill:reachColor,rx:'2',opacity:isToday?'1':isYesterday?'0.85':'0.55'});
+        svg.appendChild(r);
+      }
+      // Below-floor
+      if(reach<0 && totalH>0){
+        const r=el('rect',{x,y:yBase-totalH,width:barW,height:totalH,fill:reachColor,rx:'2',opacity:isToday?'1':'0.55'});
+        svg.appendChild(r);
+      }
+      // Today cap line
+      if(isToday){
+        const l=el('line',{x1:x,y1:yBase-totalH,x2:x+barW,y2:yBase-totalH,stroke:'#27272a','stroke-width':'2','stroke-opacity':'0.9'});
+        svg.appendChild(l);
+      }
+      // Reach labels on high days
+      if(reach>=16){
+        const lbl=el('text',{x:x+barW/2,y:yBase-floorH-reachH-4,'font-size':'8','text-anchor':'middle',fill:'#059669','font-family':'JetBrains Mono,monospace','font-weight':'700'});
+        lbl.textContent='+'+Math.round(reach); svg.appendChild(lbl);
+      }
+      // X labels
+      if(isToday || i===data.length-7 || i===0){
+        const lbl=el('text',{x:x+barW/2,y:H-4,'font-size':'8','text-anchor':'middle','font-family':'JetBrains Mono,monospace','font-weight':isToday?'700':'400',fill:isToday?'#18181b':'#a1a1aa'});
+        lbl.textContent=isToday?'today':i===data.length-7?'7d':'14d';
+        svg.appendChild(lbl);
+      }
+    });
+  })();
+
+  // ── Stability / Istiqamah HorizonChart (translated from StabilityCard.tsx) ──
+  (function(){
+    const svg = document.getElementById('stabSvg');
+    if(!svg) return;
+    const W=360, H=160, paddingBottom=24;
+
+    // 30 days of data: avg and floor (computed simply)
+    const rawScores = [
+      42,38,45,52,48,55,60,58,64,62,
+      68,65,72,70,75,73,78,76,80,79,
+      82,80,85,83,88,86,90,88,85,72
+    ];
+    // moving average window=7, floor=percentile40
+    function movAvg(arr,w){return arr.map((_,i)=>{const s=arr.slice(Math.max(0,i-w+1),i+1);return s.reduce((a,b)=>a+b,0)/s.length;});}
+    function perc40(arr){const s=[...arr].sort((a,b)=>a-b);return s[Math.floor(s.length*0.4)];}
+    const avgs = movAvg(rawScores,7);
+    const floors = rawScores.map((_,i)=>perc40(rawScores.slice(Math.max(0,i-13),i+1)));
+
+    const n = rawScores.length;
+    const maxVal = 100;
+
+    const avgPts = avgs.map((v,i)=>[(i/(n-1))*W, H-paddingBottom-((v/maxVal)*(H-paddingBottom))]);
+    const floorPts = floors.map((v,i)=>[(i/(n-1))*W, H-paddingBottom-((v/maxVal)*(H-paddingBottom))]);
+
+    function cubicBezierPath(pts){
+      return pts.reduce((acc,pt,i,a)=>{
+        if(i===0) return `M${pt[0].toFixed(1)},${pt[1].toFixed(1)}`;
+        const prev=a[i-1];
+        const cp1x=(prev[0]+(pt[0]-prev[0])*0.4).toFixed(1);
+        const cp2x=(prev[0]+(pt[0]-prev[0])*0.4).toFixed(1);
+        return `${acc} C${cp1x},${prev[1].toFixed(1)} ${cp2x},${pt[1].toFixed(1)} ${pt[0].toFixed(1)},${pt[1].toFixed(1)}`;
+      },'');
+    }
+
+    const avgLine = cubicBezierPath(avgPts);
+    const floorLine = cubicBezierPath(floorPts);
+    const reverseFloor = [...floorPts].reverse().map(p=>`L${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+    const bandArea = `${avgLine} ${reverseFloor} Z`;
+
+    const ns='http://www.w3.org/2000/svg';
+    function el(tag,attrs={}){const e=document.createElementNS(ns,tag);for(const[k,v] of Object.entries(attrs)) e.setAttribute(k,v);return e;}
+
+    // defs
+    const defs=el('defs');
+    const grad=el('linearGradient',{id:'stabGrad2',x1:'0',y1:'0',x2:'0',y2:'1'});
+    const s1=el('stop',{offset:'0','stop-color':'oklch(0.68 0.14 160)','stop-opacity':'0.4'});
+    const s2=el('stop',{offset:'1','stop-color':'oklch(0.68 0.14 160)','stop-opacity':'0.08'});
+    grad.appendChild(s1);grad.appendChild(s2);defs.appendChild(grad);svg.appendChild(defs);
+
+    // band fill
+    const band=el('path',{d:bandArea,fill:'url(#stabGrad2)'});
+    svg.appendChild(band);
+
+    // avg line (solid green)
+    const avgPath=el('path',{d:avgLine,stroke:'oklch(0.68 0.14 160)','stroke-width':'2.5',fill:'none','stroke-linecap':'round'});
+    svg.appendChild(avgPath);
+
+    // floor line (dashed)
+    const floorPath=el('path',{d:floorLine,stroke:'oklch(0.68 0.14 160)','stroke-width':'1','stroke-dasharray':'4,2',fill:'none','stroke-opacity':'0.6'});
+    svg.appendChild(floorPath);
+
+    // bottom axis
+    svg.appendChild(el('line',{x1:'0',y1:H-paddingBottom,x2:W,y2:H-paddingBottom,stroke:'#e4e4e7','stroke-width':'0.8'}));
+  })();
+
+  // ── Stability daily breakdown ──
+  (function(){
+    const el = document.getElementById('stabBreakdown');
+    if(!el) return;
+    const days=[
+      {label:'Today',val:52},{label:'Yesterday',val:23},{label:'Apr 17',val:68},
+      {label:'Apr 16',val:75},{label:'Apr 15',val:70},{label:'Apr 14',val:55},{label:'Apr 13',val:48}
+    ];
+    days.forEach(d=>{
+      el.innerHTML+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+        <div style="font-size:.78rem;color:var(--ink-2);width:72px;flex-shrink:0;font-weight:600">${d.label}</div>
+        <div style="flex:1;display:flex;align-items:center;gap:8px">
+          <div style="flex:1;height:4px;background:var(--line);border-radius:2px;overflow:hidden">
+            <div style="width:${d.val}%;height:100%;background:oklch(0.68 0.14 160);border-radius:2px"></div>
+          </div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--ink);width:28px;text-align:right;font-family:'JetBrains Mono',monospace">${d.val}%</div>
+        </div>
+      </div>`;
+    });
+  })();
+
+  function buildMujBars(containerId, dark){
+    const el = document.getElementById(containerId);
+    if(!el) return;
+    const data = [
+      {perf:68,floor:60},{perf:72,floor:61},{perf:65,floor:61},{perf:78,floor:62},
+      {perf:80,floor:64},{perf:75,floor:64},{perf:82,floor:65},{perf:79,floor:65},
+      {perf:85,floor:66},{perf:88,floor:67},{perf:84,floor:68},{perf:91,floor:69},
+      {perf:87,floor:70},{perf:14,floor:34}
+    ];
+    el.style.cssText='display:flex;align-items:flex-end;gap:4px;width:100%;height:100%';
+    data.forEach((d,i)=>{
+      const reach=d.perf-d.floor;
+      const wrap=document.createElement('div');
+      wrap.style.cssText='flex:1;display:flex;flex-direction:column;align-items:center;height:100%';
+      const lbl=document.createElement('div');
+      if(reach>=18){lbl.textContent='+'+reach;lbl.style.cssText=`font-size:.56rem;font-weight:600;font-family:'JetBrains Mono',monospace;line-height:1.4;color:${dark?'oklch(0.68 0.14 160)':'var(--green-deep)'}`;}
+      else{lbl.style.height='12px';}
+      wrap.appendChild(lbl);
+      const floorCol=dark?'#2a2a2a':'var(--line)';
+      let color;
+      if(reach>=20)color='oklch(0.52 0.14 160)';
+      else if(reach>=10)color='oklch(0.68 0.14 160)';
+      else if(reach>=0)color=dark?'oklch(0.82 0.08 160)':'oklch(0.88 0.06 160)';
+      else color=dark?'oklch(0.65 0.18 25)':'oklch(0.78 0.14 75)';
+      const floorH=Math.max(4,Math.round((d.floor/100)*90));
+      const reachH=Math.max(1,Math.round((Math.abs(reach)/100)*90));
+      const stack=document.createElement('div');
+      stack.style.cssText='flex:1;width:100%;display:flex;flex-direction:column;justify-content:flex-end;border-radius:4px 4px 0 0;overflow:hidden';
+      const rB=document.createElement('div');
+      rB.style.cssText=`width:100%;height:${reachH}px;background:${reach>=0?color:'transparent'}`;
+      const fB=document.createElement('div');
+      fB.style.cssText=`width:100%;height:${floorH}px;background:${floorCol}`;
+      stack.appendChild(rB);stack.appendChild(fB);
+      wrap.appendChild(stack);
+      if(i===13){const dot=document.createElement('div');dot.style.cssText=`width:4px;height:4px;border-radius:999px;background:${dark?'#fff':'var(--ink)'};margin-top:3px;flex-shrink:0`;wrap.appendChild(dot);}
+      el.appendChild(wrap);
+    });
+  }
+
+  buildMujBars('heroMujBars', false);
+  // mujBarsMain now rendered via mujSvg SVG
+
+  // Hero heatmap
+  (function(){
+    const grid = document.getElementById('heroHeat');
+    if(!grid) return;
+    let s = 9341;
+    function rnd(){ s=(s*9301+49297)%233280; return s/233280; }
+    for(let i=0;i<7*26;i++){
+      const d=document.createElement('div');
+      d.className='c';
+      const boost=i/(7*26);
+      const v=rnd()+boost*0.4;
+      if(v>0.88) d.className+=' l4';
+      else if(v>0.62) d.className+=' l3';
+      else if(v>0.42) d.className+=' l2';
+      else if(v>0.22) d.className+=' l1';
+      grid.appendChild(d);
+    }
+  })();
+
+
+</script>
+
+</body>
+</html>
