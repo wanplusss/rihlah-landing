@@ -49,6 +49,39 @@
   /* ───────────────── hero ───────────────── */
   .hero{max-width:1240px;margin:0 auto;padding:72px 32px 40px;position:relative}
   .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:72px;align-items:center}
+  .hero-viz{display:flex;flex-direction:column;gap:16px}
+  .hero-mobile-stats{display:none;gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:8px}
+  .hero-mobile-stats .ms{flex:1;padding:20px 18px;background:var(--paper);border-right:1px solid var(--line)}
+  .hero-mobile-stats .ms:last-child{border-right:none}
+  .hero-mobile-stats .ms .k{font-size:1.6rem;font-weight:500;letter-spacing:-.03em}
+  .hero-mobile-stats .ms .v{font-size:.72rem;color:var(--mute);margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+  @media(max-width:960px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .hero-viz{display:none}
+    .hero-mobile-stats{display:flex}
+    .hero{padding:48px 24px 32px}
+    h1{font-size:clamp(2.2rem,8vw,3.5rem)}
+    .lede{font-size:1rem}
+  }
+  @media(max-width:720px){
+    section{padding:72px 20px}
+    .feat-demo{padding:20px;min-height:auto}
+    .stat-row{grid-template-columns:repeat(2,1fr)}
+    .principles{grid-template-columns:1fr}
+    .modules{grid-template-columns:1fr}
+    /* hide complex svg charts in feat-demo on small screens — keep card/text demos */
+    .feat-demo > svg, .feat-demo #mujSvg, .feat-demo #stabSvg{display:none}
+    /* stats detail side-by-side → stack */
+    #stats-detail > div:last-child{grid-template-columns:1fr !important}
+    .philo{padding:40px 20px}
+    .philo .g{grid-template-columns:1fr}
+    .pillars{grid-template-columns:1fr}
+    .big-cta{padding:60px 20px 60px}
+    footer{padding:48px 20px 40px}
+    .nav-inner{padding:14px 20px}
+    .hero-meta{gap:16px}
+    .hero-meta > div{padding-left:10px}
+  }
   @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:48px}}
   .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;font-size:.76rem;color:var(--ink-2)}
   .eyebrow .pulse{width:6px;height:6px;border-radius:999px;background:var(--green);box-shadow:0 0 0 0 var(--green);animation:pulse 2.2s ease-out infinite}
@@ -273,10 +306,17 @@
         <div><div class="k">114</div><div class="v">surahs, Uthmani script</div></div>
         <div><div class="k">40d</div><div class="v">habit challenges</div></div>
       </div>
+
+      <!-- mobile-only stat strip (shown instead of viz panel) -->
+      <div class="hero-mobile-stats">
+        <div class="ms"><div class="k">84</div><div class="v">Daily score</div></div>
+        <div class="ms"><div class="k" style="color:var(--green-deep)">47d</div><div class="v">Streak</div></div>
+        <div class="ms"><div class="k">62%</div><div class="v">Jemaah</div></div>
+      </div>
     </div>
 
-    <!-- hero data viz panel -->
-    <div style="display:flex;flex-direction:column;gap:16px">
+    <!-- hero data viz panel (desktop only) -->
+    <div class="hero-viz" aria-hidden="false">
 
       <!-- top row: quality score + mujahadah bars -->
       <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px">
