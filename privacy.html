@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — Rihlah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fafaf9;
+    --ink:#0a0a0a;
+    --ink-2:#27272a;
+    --mute:#71717a;
+    --line:#e7e5e4;
+    --green:oklch(0.68 0.14 160);
+    --green-deep:oklch(0.52 0.13 160);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:var(--green-deep);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  nav{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--bg) 86%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:18px 32px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-weight:600;letter-spacing:-.01em;font-size:1rem}
+  .back{font-size:.86rem;color:var(--mute)}
+  .back:hover{color:var(--ink);text-decoration:none}
+
+  .wrap{max-width:720px;margin:0 auto;padding:72px 32px 100px}
+  .eyebrow{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-bottom:16px}
+  h1{font-size:clamp(2rem,4vw,3rem);font-weight:500;letter-spacing:-.03em;line-height:1.06;margin-bottom:12px}
+  h1 .serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;color:var(--green-deep)}
+  .updated{font-size:.82rem;color:var(--mute);margin-bottom:56px}
+
+  h2{font-size:1.1rem;font-weight:600;letter-spacing:-.015em;margin:48px 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  h2:first-of-type{margin-top:0}
+  p{font-size:.98rem;color:var(--ink-2);line-height:1.65;margin-bottom:14px}
+  ul{margin:10px 0 14px 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+  li{display:flex;gap:10px;align-items:flex-start;font-size:.96rem;color:var(--ink-2);line-height:1.55}
+  li::before{content:"";width:5px;height:5px;background:var(--green);border-radius:999px;margin-top:9px;flex-shrink:0}
+
+  .callout{background:#fff;border:1px solid var(--line);border-left:3px solid var(--green);border-radius:10px;padding:18px 20px;margin:24px 0}
+  .callout p{margin:0;font-size:.94rem}
+
+  footer{max-width:720px;margin:0 auto;padding:0 32px 56px;font-size:.82rem;color:var(--mute)}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">RIHLAH</span>
+  <a href="index.html" class="back">← Back to home</a>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow">Legal</div>
+  <h1>Privacy <span class="serif">Policy</span></h1>
+  <div class="updated">Last updated: April 19, 2026</div>
+
+  <div class="callout">
+    <p><strong>Short version:</strong> Rihlah stores everything on your device. No account. No server. No tracking. Your spiritual practice is yours alone.</p>
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>Rihlah is a personal spiritual companion app built for Muslims. It is developed and maintained as an independent project. You can reach us at <a href="mailto:anajwan27@gmail.com">anajwan27@gmail.com</a>.</p>
+
+  <h2>2. Data we collect</h2>
+  <p>We collect <strong>nothing</strong> on our servers because we have no servers. All data you enter into Rihlah — prayer logs, journal entries, Quran bookmarks, challenge records, sedekah entries, wirid protocols, fasting logs, and all settings — is stored exclusively in a SQLite database on your device.</p>
+  <p>This data never leaves your phone unless you explicitly export it yourself.</p>
+
+  <h2>3. Third-party services</h2>
+  <p>Rihlah makes limited, read-only network requests to the following external services:</p>
+  <ul>
+    <li><strong>Aladhan API</strong> (api.aladhan.com) — prayer time calculations based on your location or city. No personal identifiers are sent; only coordinates or city name.</li>
+    <li><strong>Waktu Solat API</strong> (api.waktusolat.app) — JAKIM-based prayer times for Malaysia. Only your GPS zone or selected zone code is used.</li>
+    <li><strong>sedekah.je API</strong> — directory of Malaysian charitable institutions used in the Give tab. No personal data is sent.</li>
+    <li><strong>Google Fonts</strong> — typography assets loaded when the app renders the Quran reader. Standard CDN request with no personal data.</li>
+  </ul>
+  <p>None of these services receive your prayer logs, journal entries, or any personal practice data.</p>
+
+  <h2>4. Device permissions</h2>
+  <ul>
+    <li><strong>Location</strong> — used optionally to auto-detect your city for prayer time calculation and to sort charitable institutions by distance. You can use the app with manual city entry instead. Location data is not stored or transmitted beyond the prayer time API request.</li>
+    <li><strong>Notifications</strong> — used to deliver local prayer time reminders, daily log reminders, and challenge check-in reminders. All notifications are scheduled locally on your device. No push notification server is used.</li>
+    <li><strong>Storage / Files</strong> — used only when you choose to export your data as CSV. The file is saved to your device; nothing is uploaded.</li>
+  </ul>
+
+  <h2>5. Children's privacy</h2>
+  <p>Rihlah does not knowingly collect any information from anyone, including children under 13, because it collects no information at all. The app is safe for use by any age group.</p>
+
+  <h2>6. Data retention and deletion</h2>
+  <p>All data lives in a SQLite file on your device. To delete all your data, uninstall the app. That's it — there is no cloud copy to request deletion of.</p>
+
+  <h2>7. Export</h2>
+  <p>You can export your prayer logs, amalan data, challenge progress, and fasting records as CSV from the Profile screen at any time. The export is yours to keep, share, or analyse however you wish.</p>
+
+  <h2>8. Changes to this policy</h2>
+  <p>If this policy changes materially, the updated date at the top of this page will reflect it. We will not add data collection without clearly disclosing it here first.</p>
+
+  <h2>9. Contact</h2>
+  <p>Questions about privacy? Email us at <a href="mailto:anajwan27@gmail.com">anajwan27@gmail.com</a>.</p>
+</div>
+
+<footer>
+  © 2026 Rihlah. Built quietly, in the spirit of ihsan.
+</footer>
+
+</body>
+</html>
